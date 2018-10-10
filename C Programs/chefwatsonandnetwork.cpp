@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	long int ff,no,a[100000],p[100000],n[100000],d[1000],e[1000],i,j,index,max=0,t=0,check;
+	char s[1000][101];
+	scanf("%ld%ld",&ff,&no);
+	for(i=0;i<ff;i++)
+	    scanf("%ld",&a[i]);
+	for(i=0;i<no;i++)
+	{
+		scanf("%ld%ld",&n[i],&p[i]);
+		check=1;
+		for(j=0;j<ff;j++)
+		{
+			if(n[i]==a[j])
+		    {
+			    d[t]=i;
+			    t++;
+			    check=0;
+		    }
+		}
+		if(check==1)
+		{
+		    e[max]=i;
+		    max++;
+		}
+		scanf("%s",&s[i]);
+	}
+	ff=max;
+	for(i=0;i<t;i++)
+	{
+		max=p[d[0]];
+	    index=d[0];
+        for(j=1;j<t;j++)
+        {
+	        if(max<p[d[j]])
+	        {
+	    	    max=p[d[j]];
+	    	    index=d[j];
+		    }
+        }
+        p[index]=0;
+        printf("%s\n",s[index]);
+	}
+	for(i=0;i<ff;i++)
+	{
+		max=p[e[0]];
+	    index=e[0];
+	    for(j=1;j<ff;j++)
+	    {
+		    if(max<p[e[j]])
+	        {
+	    	    max=p[e[j]];
+	    	    index=e[j];
+		    }
+        }
+        p[index]=0;
+        printf("%s\n",s[index]);
+	}
+	return 0;	
+}

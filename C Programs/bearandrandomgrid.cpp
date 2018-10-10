@@ -1,0 +1,80 @@
+#include<stdio.h>
+int main()
+{
+	int cases;
+	scanf("%d",&cases);
+	while(cases--)
+	{
+		int m,n,i,j,k,p,q;
+		scanf("%d%d",&m,&n);
+		char a[m],b[n+1][n+1];
+		int s[n][n];
+		scanf("%s",a);
+		for(i=0;i<n;i++)
+			scanf("%s",&b[i]);
+		for(j=0;j<n;j++)
+		{
+			for(k=0;k<n;k++)
+			{
+				s[j][k]=0;
+				if(b[j][k]=='.')
+				{
+					p=j;q=k;
+					for(i=0;i<m;i++)
+		            {
+			            if(a[i]=='L')
+			            {
+				            if((b[p][q-1]=='.')&&(q-1>=0))
+				            {
+				            	s[j][k]++;
+				            	q=q-1;
+							}
+				            else
+				                break;
+			            }
+			            if(a[i]=='R')
+			            {
+			            	if((b[p][q+1]=='.')&&(q+1<n))
+				            {
+				            	s[j][k]++;
+				            	q=q+1;
+							}
+				            else
+				                break;
+						}
+			            if(a[i]=='U')
+			            {
+			            	if((b[p-1][q]=='.')&&(p-1>=0))
+				            {
+				            	s[j][k]++;
+				            	p=p-1;
+							}
+				            else
+				                break;
+						}
+			            if(a[i]=='D')
+			            {
+			            	if((b[p+1][q]=='.')&&(p+1<n))
+				            {
+				            	s[j][k]++;
+				            	p=p+1;
+							}
+				            else
+				                break;
+						}
+		            }
+				}
+			}
+		}
+		int x=0;
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				x=x^s[i][j];	
+			}
+		}
+		printf("%d\n",x);
+	}
+	return 0;
+}
